@@ -48,13 +48,13 @@ function agregarCompra() {
   }
 
   //Calcular subtotal sin descuento
-  const subtotal = (precio * cantidad).toFixed(2);  
+  const subtotal = parseFloat(precio * cantidad).toFixed(2);  
   //Calcular descuento
-  const descuentoAplicado = (subtotal * (descuento / 100)).toFixed(2); 
+  const descuentoAplicado = parseFloat(subtotal * (descuento / 100)).toFixed(2); 
   //Calcular subtotal con descuento
-  const totalProducto = (subtotal - descuentoAplicado).toFixed(2); 
+  const totalProducto = parseFloat(subtotal - descuentoAplicado).toFixed(2); 
   //Calcular total de la compra sumando los sucesivos totalproducto
-  total += totalProducto;
+  total += parseFloat(totalProducto);
 
   // Crear un objeto item con producto, precio, descuento, cantidad, subtotal, descuentoAplicado, totalProducto
   const item = {
