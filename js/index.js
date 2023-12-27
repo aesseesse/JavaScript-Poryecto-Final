@@ -48,11 +48,11 @@ function agregarCompra() {
   }
 
   //Calcular subtotal sin descuento
-  const subtotal = Math.round(precio,-2) * cantidad;  
+  const subtotal = (precio * cantidad).toFixed(2);  
   //Calcular descuento
-  const descuentoAplicado = subtotal * (descuento / 100); 
+  const descuentoAplicado = (subtotal * (descuento / 100)).toFixed(2); 
   //Calcular subtotal con descuento
-  const totalProducto = subtotal - descuentoAplicado; 
+  const totalProducto = (subtotal - descuentoAplicado).toFixed(2); 
   //Calcular total de la compra sumando los sucesivos totalproducto
   total += totalProducto;
 
