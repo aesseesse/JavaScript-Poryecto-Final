@@ -1,11 +1,27 @@
 
 
-  fetch('https://fakestoreapi.com/products')
-    .then((res)=>{
-        return res.json()
-    })
-    .then((data)=>{
-        console.log(data)
+function cargarDatosDesdeAPI() {
+  return new Promise((resolve, reject) => {
+    fetch('https://fakestoreapi.com/products')
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error('No se pudo obtener los datos');
+        }
+        return res.json();
+      })
+      .then((data) => {
+        resolve(data); // Resuelve la promesa con los datos obtenidos
+      })
+      .catch((error) => {
+        reject(error); // Rechaza la promesa con el error
+      });
+  });
+}
+
+// Uso de la función cargarDatosDesdeAPI
+cargarDatosDesdeAPI()
+  .then((data) => {
+    console.log(data)
         const contenedor = document.getElementById('contenedorAPI')
       
         const productsDiv = document.getElementById('contenedorAPI');
@@ -36,8 +52,8 @@
         `;
         productsDiv.appendChild(productDiv);
         }); 
-    })
-
-
-
+  })
+  .catch((error) => {
+    console.error('Hubo un problema al cargar los datos:', error);
+  });
     

@@ -48,13 +48,14 @@ function agregarCompra() {
   }
 
   //Calcular subtotal sin descuento
-  const subtotal = parseFloat(precio * cantidad).toFixed(2);  
+  const subtotal = precio * cantidad;  
   //Calcular descuento
-  const descuentoAplicado = parseFloat(subtotal * (descuento / 100)).toFixed(2); 
+  let descProduct = parseFloat(descuento.toFixed(2));
+  const descuentoAplicado = parseFloat((subtotal * descuento/100).toFixed(2)); 
   //Calcular subtotal con descuento
-  const totalProducto = parseFloat(subtotal - descuentoAplicado).toFixed(2); 
+  const totalProducto = subtotal - descuentoAplicado; 
   //Calcular total de la compra sumando los sucesivos totalproducto
-  total += parseFloat(totalProducto);
+  total += totalProducto;
 
   // Crear un objeto item con producto, precio, descuento, cantidad, subtotal, descuentoAplicado, totalProducto
   const item = {
@@ -134,10 +135,18 @@ function deletItem(itemId) {
   // Verificar si se encontró el elemento con ese ID
   if (index !== -1) {
     const deletedItemTotal = parseFloat(items[index].totalProducto).toFixed(2);
+    console.log(deletedItemTotal)
+    
     // Eliminar el elemento del arreglo 'items' en la posición 'index'
     items.splice(index, 1);
     total -= deletedItemTotal; // Resta el total del elemento eliminado al total general
-
+    
+    if (items.length == -1 || total<0) {
+      total =parseInt(0);
+    }
+    else{
+      total = Math.round(total*100)/100;
+    }
     guardarCompras(items);
     guardarTotalCompras(total);
     mostrarResumen();
