@@ -133,7 +133,7 @@ function deletItem(itemId) {
 
   // Verificar si se encontró el elemento con ese ID
   if (index !== -1) {
-    const deletedItemTotal = items[index].totalProducto;
+    const deletedItemTotal = parseFloat(items[index].totalProducto).toFixed(2);
     // Eliminar el elemento del arreglo 'items' en la posición 'index'
     items.splice(index, 1);
     total -= deletedItemTotal; // Resta el total del elemento eliminado al total general
